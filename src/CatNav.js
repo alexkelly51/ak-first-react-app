@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import './CatNav.css';
 
 export default class CatNav extends React.Component {
   constructor(props){
@@ -12,19 +13,19 @@ export default class CatNav extends React.Component {
   componentDidMount() {
     axios.get(`https://api.gousto.co.uk/products/v2.0/categories`)
       .then(res => {
-        const mice = res.data;
-        console.log(mice.data[0].title);
-        const titles = mice.data;
-        console.log(titles);
+        const allData = res.data;
+        // console.log(allData.data[0].title);
+        const titles = allData.data;
+        // console.log(titles);
         this.setState({ titles });
       })
   }
 
   render() {
     return (
-      <ul>
-        { this.state.titles.map(category => <li key={category.id}>{category.title}</li>) }
-      </ul>
+      <div className="categoriesList">
+        { this.state.titles.map(category => <p className="categoryItem" key={category.id}>{category.title}</p>) }
+      </div>
     )
   }
 }

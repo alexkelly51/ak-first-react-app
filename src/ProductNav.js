@@ -18,8 +18,15 @@ export default class ProductNav extends React.Component {
         const products = allData.data;
         // console.log(titles);
         this.setState({ products });
+        console.log(products)
+        // const categories = products.categories
+        // console.log(categories)
+        // const belongToCategory = products.map(category => )
+        // console.log(belongToCategory)
       })
   }
+
+
 
   render() {
     return (

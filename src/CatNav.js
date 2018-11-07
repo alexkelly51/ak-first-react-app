@@ -21,7 +21,9 @@ export default class CatNav extends React.Component {
       })
   }
 
+
   render() {
+    console.log(this.state.categories)
     return (
       <div className="categoriesList">
         { this.state.categories.map(category => <p className="categoryItem" key={category.id}>{category.title}</p>) }
@@ -30,3 +32,9 @@ export default class CatNav extends React.Component {
   }
 }
 
+
+
+
+// onClick ={myFunction}
+// myFunction = className ? is this if true : is this if false
+// toggle between true and false

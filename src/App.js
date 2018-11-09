@@ -7,7 +7,7 @@ import ProductNav from './ProductNav'
 import TestPage from './TestPage'
 import TestPageTwo from './TestPageTwo'
 import TestPageThree from './TestPageThree'
-import TestPageFour from './TestPageFour'
+import TestPageFive from './TestPageFive'
 
 
 const App = () => {
@@ -15,8 +15,7 @@ const App = () => {
     <div className="App">
       <h1> Gousto Store Cupboard</h1>
       <h2>Click on a category</h2>
-      <TestPageTwo/>
-      <TestPageFour />
+      <TestPageFive />
 
 
     </div>

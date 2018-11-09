@@ -5,7 +5,7 @@ import axios from 'axios';
 
 
 
-class TestPageFour extends React.Component {
+class TestPageFive extends React.Component {
 
   constructor () {
     super();
@@ -30,13 +30,13 @@ class TestPageFour extends React.Component {
     axios.get(`https://api.gousto.co.uk/products/v2.0/categories`)
       .then(res => {
         const allData = res.data;
-        const categories = allData.data;
+        const categories = _.sortBy(allData.data, 'title');
         this.setState({ categories: categories });
       });
     axios.get(`https://api.gousto.co.uk/products/v2.0/products?includes[]=categories&includes[]=attri`)
       .then(res => {
         const allDataItems = res.data;
-        const items = allDataItems.data;
+        const items = _.sortBy(allDataItems.data, 'title');
         this.setState({ items: items });
       })
   }
@@ -62,36 +62,55 @@ class TestPageFour extends React.Component {
 
 let CategoryFilter = ({ categories, onSelectCategory}) => {
   const links = categories.map(i => (
-    <div key={i.id} class="categoryItem" >
+    <div key={i.id} className="categoryItem" >
       <a href="#" onClick={() => onSelectCategory(i.id)}>
         { i.title }
       </a>
     </div>
   ));
   return (
-    <div class="categoriesList">
+    <div className="categoriesList">
       { links }
     </div>
   )
 };
 
 let ItemList = ({items, selectedCategory}) => {
-  console.log(selectedCategory)
   const currentItems = items
-    .filter(item => item.categories.find(itemCategory => itemCategory.id === selectedCategory))
-    .map(item => (
+    .filter(item => item.categories.find(itemCategory => itemCategory.id === selectedCategory));
+
+  return (
+    <div>
+      {_.size(currentItems) === 0 ? (
+        <div>
+          <h3> No Items </h3>
+        </div>
+      ) : (
+        <div >
+          {_.map(currentItems, item => (
       <div key={item.id} >
          { item.title }
       </div>
-    ));
-    console.log(currentItems)
-    console.log(selectedCategory)
-  return (
-    <div>
-      { currentItems }
+
+          ))}
+        </div>
+      )}
     </div>
   );
 };
 
 
-export default TestPageFour
+export default TestPageFive
+
+
+    // .size(items === 0 ? (
+    //     <div>
+    //       "No items"
+    //     </div>
+    //   ) : (
+
+
+
+
+
+

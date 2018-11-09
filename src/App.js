@@ -1,23 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
-import HelloWorldList from './HelloWorldList';
-// import PersonList from './PersonList';
-import CatNav from './CatNav'
-import ProductNav from './ProductNav'
-import TestPage from './TestPage'
-import TestPageTwo from './TestPageTwo'
-import TestPageThree from './TestPageThree'
-import TestPageFive from './TestPageFive'
+import TestPageSix from './TestPageSix'
 
 
 const App = () => {
   return (
-    <div className="App">
+    <div className="app">
       <h1> Gousto Store Cupboard</h1>
       <h2>Click on a category</h2>
-      <TestPageFive />
-
-
+      <TestPageSix />
     </div>
   );
 };

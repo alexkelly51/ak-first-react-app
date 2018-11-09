@@ -1,11 +1,13 @@
 import _ from 'lodash';
-import React, { Component } from 'react';
-import './TestPageFive.css';
+import React from 'react';
+import './TestPageSix.css';
+import ItemList from './TestFunctions'
+import CategoryFilter from './TestFunctionsCategory'
 import axios from 'axios';
 
 
 
-class TestPageFive extends React.Component {
+class TestPageSix extends React.Component {
 
   constructor () {
     super();
@@ -26,7 +28,6 @@ class TestPageFive extends React.Component {
   }
 
   componentWillMount() {
-    const {categories, items} = this.state
     axios.get(`https://api.gousto.co.uk/products/v2.0/categories`)
       .then(res => {
         const allData = res.data;
@@ -40,7 +41,6 @@ class TestPageFive extends React.Component {
         this.setState({ items: items });
       })
   }
-
 
   render() {
     const { categories, items, selectedCategoryId } = this.state;
@@ -60,57 +60,4 @@ class TestPageFive extends React.Component {
 }
 
 
-let CategoryFilter = ({ categories, onSelectCategory}) => {
-  const links = categories.map(i => (
-    <div key={i.id} className="categoryItem" >
-      <a href="#" onClick={() => onSelectCategory(i.id)}>
-        { i.title }
-      </a>
-    </div>
-  ));
-  return (
-    <div className="categoriesList">
-      { links }
-    </div>
-  )
-};
-
-let ItemList = ({items, selectedCategory}) => {
-  const currentItems = items
-    .filter(item => item.categories.find(itemCategory => itemCategory.id === selectedCategory));
-
-  return (
-    <div>
-      {_.size(currentItems) === 0 ? (
-        <div>
-          <h3> No Items </h3>
-        </div>
-      ) : (
-        <div >
-          {_.map(currentItems, item => (
-      <div key={item.id} >
-         { item.title }
-      </div>
-
-          ))}
-        </div>
-      )}
-    </div>
-  );
-};
-
-
-export default TestPageFive
-
-
-    // .size(items === 0 ? (
-    //     <div>
-    //       "No items"
-    //     </div>
-    //   ) : (
-
-
-
-
-
-
+export default TestPageSix

@@ -1,0 +1,13 @@
+.categoriesList {
+  display: flex;
+}
+
+.categoryItem {
+  margin: 10px;
+}
+
+.categoryItem active {
+  margin: 10px;
+  font-weight: bold;
+}
+

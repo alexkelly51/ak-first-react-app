@@ -2,10 +2,10 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import './CatNav.css';
 import axios from 'axios';
-const ReactDOM = require('react-dom');
 
 
-class TestPageThree extends React.Component {
+
+class TestPageFour extends React.Component {
 
   constructor () {
     super();
@@ -20,27 +20,23 @@ class TestPageThree extends React.Component {
   }
 
   onSelectCategory(id) {
-    this.setState({
+  this.setState({
       selectedCategoryId: id
     });
   }
 
   componentWillMount() {
+    const {categories, items} = this.state
     axios.get(`https://api.gousto.co.uk/products/v2.0/categories`)
       .then(res => {
         const allData = res.data;
-        // console.log(allData.data[7].id);
         const categories = allData.data;
-        // console.log(categories);
         this.setState({ categories: categories });
       });
     axios.get(`https://api.gousto.co.uk/products/v2.0/products?includes[]=categories&includes[]=attri`)
       .then(res => {
         const allDataItems = res.data;
-        // console.log(allData.data[0].title);
         const items = allDataItems.data;
-        // console.log(items[0].categories[0].id);
-        console.log(items)
         this.setState({ items: items });
       })
   }
@@ -48,8 +44,8 @@ class TestPageThree extends React.Component {
 
   render() {
     const { categories, items, selectedCategoryId } = this.state;
-    const deafultCategory = _.first(categories);
-    const selectedCategory = _.find(categories, i => i.id === selectedCategoryId) || deafultCategory;
+    const defaultCategory = _.first(categories);
+    const selectedCategory = _.find(categories, i => i.id === selectedCategoryId) || defaultCategory;
     console.log(selectedCategory)
     console.log(selectedCategoryId)
     console.log(categories)
@@ -57,7 +53,7 @@ class TestPageThree extends React.Component {
     return (
       <div>
         <CategoryFilter categories={categories} onSelectCategory={this.onSelectCategory} />
-        <ItemList items={items} selectedCategory={selectedCategory} />
+        <ItemList items={items} selectedCategory={selectedCategoryId} />
       </div>
     );
   }
@@ -67,7 +63,7 @@ class TestPageThree extends React.Component {
 let CategoryFilter = ({ categories, onSelectCategory}) => {
   const links = categories.map(i => (
     <div key={i.id}>
-      <a href={i.id} onClick={() => onSelectCategory(i.id)}>
+      <a href="#" onClick={() => onSelectCategory(i.id)}>
         { i.title }
       </a>
     </div>
@@ -80,16 +76,16 @@ let CategoryFilter = ({ categories, onSelectCategory}) => {
 };
 
 let ItemList = ({items, selectedCategory}) => {
+  console.log(selectedCategory)
   const currentItems = items
-    // .filter(i => {
-    //   i.categories.map(category => {
-    //     return category.id === selectedCategory;
-    //   })})
-    .map(i => (
-      <div key={i.id}>
-        { i.title }
+    .filter(item => item.categories.find(itemCategory => itemCategory.id === selectedCategory))
+    .map(item => (
+      <div key={item.id}>
+         { item.title }
       </div>
     ));
+    console.log(currentItems)
+    console.log(selectedCategory)
   return (
     <div>
       { currentItems }
@@ -97,12 +93,8 @@ let ItemList = ({items, selectedCategory}) => {
   );
 };
 
-export default TestPageThree
-
-// .filter(i => i.category.id === selectedCategory.id)
+// const result = roles.filter(role => role.groups.find(group => user.groups.includes(group.id)));
 
 
-    // .filter(i => {
-    //   i.categories.some(category => {
-    //     category.id === selectedCategoryId;
-    //   })
+
+export default TestPageFour

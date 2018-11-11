@@ -1,7 +1,9 @@
 .textBold {
-  color: red;
+  text-decoration: none;
+  font-weight: bold;
+
 }
 
 .textNotBold {
-  color: green;
+  text-decoration: none;
 }

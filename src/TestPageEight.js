@@ -1,13 +1,13 @@
 import _ from 'lodash';
 import React from 'react';
 import './TestPageSix.css';
-import ItemList from './TestFunctions'
+import ItemListTwo from './TestFunctionTwo'
 import CategoryFilter from './TestFunctionsCategory'
 import axios from 'axios';
 
 
 
-class TestPageSeven extends React.Component {
+class TestPageEight extends React.Component {
 
   constructor () {
     super();
@@ -16,11 +16,11 @@ class TestPageSeven extends React.Component {
       categories: [],
       items: [],
       selectedCategoryId: null,
-      active: false
+      selectedItemId: null
     };
 
     this.onSelectCategory = this.onSelectCategory.bind(this);
-    this.activate = this.activate.bind(this)
+    this.onSelectItem = this.onSelectItem.bind(this);
   }
 
   onSelectCategory(id) {
@@ -29,10 +29,9 @@ class TestPageSeven extends React.Component {
     });
   }
 
-  activate(id) {
-    const currentState = this.state.active;
+  onSelectItem(id) {
     this.setState({
-      active: !currentState
+      selectedItemId: id
     });
   }
 
@@ -52,26 +51,24 @@ class TestPageSeven extends React.Component {
   }
 
   render() {
-    const { categories, items, selectedCategoryId, active} = this.state;
+    const { categories, items, selectedCategoryId, selectedItemId, active, itemActive} = this.state;
     const defaultCategory = _.first(categories);
     const selectedCategory = _.find(categories, i => i.id === selectedCategoryId) || defaultCategory;
+    const defaultItem = _.first(items);
+    const selectedItem = _.find(items, i => i.id === selectedItemId) || defaultItem;
+    console.log(selectedItem)
+    console.log(selectedItemId)
+
     return (
       <div>
-        <CategoryFilter categories={categories} onSelectCategory={this.onSelectCategory} activate={this.activate} selectedCategory={selectedCategoryId}/>
-        <ItemList items={items} selectedCategory={selectedCategoryId} />
+        <CategoryFilter categories={categories} onSelectCategory={this.onSelectCategory} selectedCategory={selectedCategoryId}/>
+        <ItemListTwo items={items} onSelectItem={this.onSelectItem}
+        selectedCategory={selectedCategoryId} selectedItem={selectedItemId}  />
       </div>
     );
   }
 }
 
 
-export default TestPageSeven
-
-
-
-
-
-
-
-
+export default TestPageEight
 

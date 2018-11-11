@@ -1,23 +1,25 @@
 import _ from 'lodash';
 import React from 'react';
 import './TestPageSeven.css';
-import axios from 'axios';
+import { Grid, Row, Col } from 'react-flexbox-grid';
 
-let CategoryFilter = ({ categories, onSelectCategory, activate, selectedCategory}) => {
-  console.log(onSelectCategory)
-  console.log(activate)
-  console.log(selectedCategory)
+let CategoryFilter = ({ categories, onSelectCategory, selectedCategory}) => {
   const links = categories.map(i => (
-    <div key={i.id} className="categoryItem" onClick={() => onSelectCategory(i.id)}>
-      <a key={i.id} href="#" onClick={() => activate((i.id)) } className={selectedCategory === i.id ? "textBold" : "textNotBold"}>
-        { i.title }
-      </a>
-    </div>
+    <Col key={i.id} xs={6} md={3} lg={1} >
+      <div key={i.id} className="categoryItem" onClick={() => onSelectCategory(i.id)}>
+        <a key={i.id} href="#" className={selectedCategory === i.id ? "textBold" : "textNotBold"}>
+          { i.title }
+        </a>
+      </div>
+      </Col>
+
   ));
   return (
-    <div className="categoriesList">
-      { links }
-    </div>
+    <Grid>
+      <Row>
+        { links }
+      </Row>
+    </Grid>
   )
 };
 

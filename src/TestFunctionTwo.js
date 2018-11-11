@@ -24,6 +24,7 @@ let ItemListTwo = ({items, onSelectItem, selectedCategory, itemActivate, selecte
             description={item.description}
             onSelect={() => onSelectItem(item.id)}
             active={selectedItem === item.id ? "show" : "hide"}
+            headerActive={selectedItem === item.id ? "bold" : "notBold"}
             />
           ))
       }
@@ -36,10 +37,10 @@ let ItemListTwo = ({items, onSelectItem, selectedCategory, itemActivate, selecte
 export default ItemListTwo
 
 
-let ItemDescriptionsTwo = ({id, title, description, onSelect, active}) => (
+let ItemDescriptionsTwo = ({id, title, description, onSelect, active, headerActive}) => (
   <div onClick={onSelect}>
-    <div className="item">
-      {title}
+    <div className={headerActive}>
+      <p className={headerActive}>{title}</p>
     </div>
   <div className={active}>{description}</div>
   </div>

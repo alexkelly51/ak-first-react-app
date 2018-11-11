@@ -1,17 +1,34 @@
 import _ from 'lodash';
 import React from 'react';
-import './TestPageSeven.css';
+import './TestPageSix.css';
 import axios from 'axios';
+
+
+export default class ItemPanel extends React.Component
+  {
+  constructor () {
+    super();
+
+    this.state = {
+      selectedProductId: []
+    };
+    this.onSelectProducts = this.onSelectProducts.bind(this);
+  }
+
+  onSelectProducts(id) {
+  // const currentState = this.state.active;
+  this.setState({
+      selectedProductId: id
+    });
+  }
 
 let ItemList = ({items, selectedCategory}) => {
   const currentItems = items
     .filter(item => item.categories.find(itemCategory => itemCategory.id === selectedCategory));
-
-
   return (
-    <div className="itemsList ">
+    <div>
       {_.size(currentItems) === 0 ? (
-        <div className="noItems">
+        <div>
           <h3> No Items </h3>
         </div>
       ) : (
@@ -22,8 +39,8 @@ let ItemList = ({items, selectedCategory}) => {
             id={item.id}
             title={item.title}
             description={item.description}
-            // onSelect={() => this.selectedItem}
-            // active={false}
+            onSelect={() => this.selectedProductId}
+            active={false}
             />
           ))
       }
@@ -38,12 +55,10 @@ export default ItemList
 
 let ItemDescriptions = ({id, title, description, onSelect, active}) => (
   <div onClick={onSelect}>
-    <div className= "item" active={active}>
+    <div data-testid="panel-title" active={active}>
       {title}
     </div>
 
-    {active && <div>{description}</div>}
+    {active && <div data-testid="panel-desc">{description}</div>}
   </div>
 );
-
-

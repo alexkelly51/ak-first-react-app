@@ -6,8 +6,8 @@
   margin: 10px;
 }
 
-.categoryItem active {
-  margin: 10px;
+.categoryItemActive {
+  margin: 20px;
   font-weight: bold;
 }
 
